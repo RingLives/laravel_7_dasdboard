@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Helpers\DynamicRoutes;
 
-class RedirectIfAuthenticated
+class DynamicRoutesMiddleware
 {
     /**
      * Handle an incoming request.
