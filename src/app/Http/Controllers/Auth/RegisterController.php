@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -28,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+     protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -49,9 +48,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' =>  'required|string|email|max:255|unique:mxp_users',
+            'password' => 'required|string|min:6|confirmed',
+            'phone_no' => 'required|string|max:255',
         ]);
     }
 
@@ -64,9 +65,22 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
+            'type' => "",
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
+            'phone_no' => $data['phone_no'],
+            'remember_token' => $data['_token'],
+            'is_active' => '0',
+            'user_role_id' => '1',
         ]);
     }
+
+
+    // To Prevent immediate Login After Registration
+    // Comment out $this->guard()->login($user); 
+    // From Illuminate\Foundation\Auth\RegistersUsers
+
 }
