@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Procedures\ProcedueresController;
 
 class RouteAccess
 {
@@ -25,6 +26,8 @@ class RouteAccess
         // $company_id=session()->get('company_id');
 
         // $routePermission = DB::select('call get_permission("'.$request->session()->get('user_role_id').'", "'.$routeName.'","'.$company_id.'")');
+
+        // $routePermission = ProcedueresController::get_permission($request->session()->get('user_role_id'),$routeName,$company_id);
         
         // $access = 0;
         // foreach ($routePermission as $value) {

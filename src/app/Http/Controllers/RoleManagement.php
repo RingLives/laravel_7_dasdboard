@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Procedures\ProcedueresController;
 use App\Http\Controllers\dataget\ListGetController;
 use App\Http\Controllers\Message\StatusMessage;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +62,9 @@ class RoleManagement extends Controller
 
         $group_id = $request->session()->get('group_id');
         
-        $roleList = DB::select('call get_all_role_list_by_group_id('.$group_id.')');
+        // $roleList = DB::select('call get_all_role_list_by_group_id('.$group_id.')');
+
+        $roleList = ProcedueresController::get_all_role_list_by_group_id($group_id);
 
         return view('role_management.role_list', compact('roleList', 'roleList'));
     }
@@ -86,7 +89,9 @@ class RoleManagement extends Controller
         $super_admin_id = Auth::user()->user_id;
         $companies = ListGetController::companyList($request);
 
-        $companysAllRoles = DB::select('call get_roles_by_company_id('.$super_admin_id.','.$request->id.')');
+        // $companysAllRoles = DB::select('call get_roles_by_company_id('.$super_admin_id.','.$request->id.')');
+
+        $companysAllRoles = ProcedueresController::get_roles_by_company_id($super_admin_id,$request->id);
 
         $onlyRoleCompanys = [];
         foreach ($companysAllRoles as $role) {

@@ -19,11 +19,18 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('bsbmd/plugins/node-waves/waves.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('bsbmd/plugins/animate-css/animate.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('bsbmd/plugins/morrisjs/morris.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bsbmd/css/select2.min.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('bsbmd/css/style.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('bsbmd/css/themes/all-themes.css') }}">
              <!-- Google Fonts -->
             <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+            <!-- Bootstrap Material Datetime Picker Css -->
+            <link href="{{ asset('bsbmd/css/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet" />
+            <link href="{{ asset('bsbmd/css/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bsbmd/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" />
+
         @show
 
         @yield('extra-css')
@@ -33,6 +40,12 @@
                 'csrfToken' => csrf_token(),
             ]) !!};
         </script>
+
+        <style type="text/css">
+            .card{
+                clear: both;
+            }
+        </style>
     </head>
 
     <body class="theme-red">
@@ -50,13 +63,14 @@
             <script type="text/javascript" src="{{ asset('bsbmd/plugins/bootstrap/js/bootstrap.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bsbmd/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bsbmd/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bsbmd/js/select2.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bsbmd/plugins/node-waves/waves.js') }}"></script>
 
         @show    
-        @yield('extra-script')
         @section('script-bottom')
             <script type="text/javascript" src="{{ asset('bsbmd/js/admin.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bsbmd/js/demo.js') }}"></script>
         @show
+        @yield('extra-script')
     </body>
 </html>
