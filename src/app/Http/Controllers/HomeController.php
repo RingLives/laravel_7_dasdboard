@@ -9,6 +9,7 @@ use App\userbuyer;
 use App\Http\Controllers\Source\User\RoleDefine;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\IpCheckCOntroller;
+use App\Http\Controllers\Procedures\ProcedueresController;
 
 class HomeController extends Controller {
 	/**
@@ -66,12 +67,19 @@ class HomeController extends Controller {
 
 		$menus_array = array();
 		if (isset($user_role_id)) {
-			$menus = DB::select('call get_user_menu_by_role("' . $user_role_id . '","' . $company_id . '")');
+
+			// $menus = DB::select('call get_user_menu_by_role("' . $user_role_id . '","' . $company_id . '")');
+
+			//($role_id,$comp_id)
+			$menus = ProcedueresController::get_user_menu_by_role($user_role_id,$company_id);
 
 			$i = 0;
 			foreach ($menus as $key => $value) {
 
-				$child_menu = DB::select('call get_child_menu_list("' . $value->menu_id . '","' . $user_role_id . '","' . $company_id . '")');
+				// $child_menu = DB::select('call get_child_menu_list("' . $value->menu_id . '","' . $user_role_id . '","' . $company_id . '")');
+
+				$child_menu = ProcedueresController::get_child_menu_list($value->menu_id,$user_role_id,$company_id);
+
                     $lower=strtolower($value->name);
                     $final_key=str_replace(' ', '_', $lower);
                     $menu_trans=trans("others.mxp_menu_"."$final_key");
